@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les catégorie :{% endblock %}
+
+{% block body %}
+    <h1>Toutes les catégorie :</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4  g-sm-2 g-md-4">
+    {% for category in categories %}
+        <div class="list-group">
+            <a href="{{ path("category_show", { categoryName: category.name }) }}" class="list-group-item  list-group-item-action">{{category.name}}</a>
+        </div>
+    {% else %}
+        Aucune catégorie trouvée.
+    {% endfor %}
+    </div>
+{% endblock %}
