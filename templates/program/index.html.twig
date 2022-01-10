@@ -3,18 +3,21 @@
 {% block title %}Hello ProgramController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/nelsonbelgardepro/Documents/developpement_web/DonkeyShool/Symfony/donkey-series/src/Controller/ProgramController.php'|file_link(0) }}">src/Controller/ProgramController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/nelsonbelgardepro/Documents/developpement_web/DonkeyShool/Symfony/donkey-series/templates/program/index.html.twig'|file_link(0) }}">templates/program/index.html.twig</a></code></li>
-    </ul>
-    <h2>{{ website }}</h2>
-</div>
+    <h1>Toutes les séries de la table program : </h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4  g-sm-2 g-md-4">
+    {% for program in programs %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{program.poster}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h5>
+                    <p class="card-text">{{ program.summary }}</p>
+                    <a href="{{ path("program_show", { id: program.id }) }}" class="btn btn-primary">Voir la fiche</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        Aucune série trouvée.
+    {% endfor %}
+    </div>
 {% endblock %}
